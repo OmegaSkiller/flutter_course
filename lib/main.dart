@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -5,28 +7,28 @@ void main() => runApp(new MyApp());
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var qIndex = 0;
+class _MyAppState extends State<MyApp> {
+  var _qIndex = 0;
 
-  void happyFunc() {
+  void _happyFunc() {
     setState(() {
-      qIndex = 1;
+      _qIndex = 1;
     });
   }
 
-  void sadFunc() {
+  void _sadFunc() {
     setState(() {
-      qIndex = 2;
+      _qIndex = 2;
     });
   }
 
-  void resetFunc() {
+  void _resetFunc() {
     setState(() {
-      qIndex = 0;
+      _qIndex = 0;
     });
   }
 
@@ -42,35 +44,47 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('--- Kydesnik --- (App)'),
         ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(qsn[qIndex]),
+        body: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Are you Sergo?'),
+              Container(
+//                width: double.infinity,
+                child: Text(
+                  'Are you Sergo?',
+                  style: TextStyle(fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RaisedButton(
                 child: Text('Yes'),
-                onPressed: happyFunc,
+                onPressed: _happyFunc,
               ),
               RaisedButton(
                 child: Text('No'),
-                onPressed: sadFunc,
+                onPressed: _sadFunc,
               )
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               RaisedButton(
                 child: Text('RESET'),
-                onPressed: resetFunc,
+                onPressed: _resetFunc,
               )
             ],
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.all(10),
+            child: Text(
+              qsn[_qIndex],
+              style: TextStyle(fontSize: 28),
+              textAlign: TextAlign.center,
+            ),
           ),
         ]),
       ),
